@@ -55,7 +55,11 @@ Validation: npm install zod
 
 Development dependency: npm install -D nodemon
 
-
+*package.json*
+"scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
+  }
 
 
 
