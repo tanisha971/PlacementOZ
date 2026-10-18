@@ -1,8 +1,25 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
+import {
+  Zap,
+  ArrowRight,
+  GraduationCap,
+  UserRound,
+  UsersRound,
+  ShieldCheck,
+  BriefcaseBusiness,
+  CheckCircle2,
+  Building2,
+  Bell,
+  Sparkles,
+  Target,
+  TrendingUp,
+} from "lucide-react";
 
 export default function Hero() {
   const { dark } = useTheme();
+  const [selectedRole, setSelectedRole] = useState("Student");
 
   return (
     <section
@@ -29,8 +46,8 @@ export default function Hero() {
                   : "bg-[#593C96]/10 text-[#593C96]"
               }`}
             >
-              <span className="w-2 h-2 rounded-full bg-[#C674CE]" />
-              Smarter Placements. Better Careers.
+              <Zap className="h-4 w-4" />
+              AI-Powered Placement Intelligence
             </div>
 
             <h1
@@ -72,49 +89,65 @@ export default function Hero() {
                     : "border-[#593C96]/20 text-[#593C96] hover:bg-[#593C96]/5"
                 }`}
               >
-                Explore Platform
+                Explore Opportunities
               </a>
             </div>
 
-            <div className="flex items-center gap-8 mt-10">
-              <div>
-                <p
-                  className={`text-2xl font-bold ${
-                    dark ? "text-white" : "text-[#1F1C47]"
-                  }`}
-                >
-                  01
-                </p>
-                <p
-                  className={`text-sm ${
-                    dark ? "text-white/50" : "text-[#1F1C47]/50"
-                  }`}
-                >
-                  Unified Platform
-                </p>
-              </div>
-
-              <div
-                className={`h-10 w-px ${
-                  dark ? "bg-white/10" : "bg-[#1F1C47]/10"
+            {/* Role Selector */}
+            <div className="mt-10">
+              <p
+                className={`text-sm font-medium mb-4 ${
+                  dark ? "text-white/70" : "text-[#1F1C47]/75"
                 }`}
-              />
+              >
+                I am a
+              </p>
 
-              <div>
-                <p
-                  className={`text-2xl font-bold ${
-                    dark ? "text-white" : "text-[#1F1C47]"
-                  }`}
-                >
-                  AI
-                </p>
-                <p
-                  className={`text-sm ${
-                    dark ? "text-white/50" : "text-[#1F1C47]/50"
-                  }`}
-                >
-                  Powered Insights
-                </p>
+              <div className="flex flex-wrap gap-3">
+                {[
+                  {
+                    name: "Student",
+                    icon: GraduationCap,
+                  },
+                  {
+                    name: "Placement Officer",
+                    icon: UserRound,
+                  },
+                  {
+                    name: "Recruiter",
+                    icon: UsersRound,
+                  },
+                  {
+                    name: "Admin",
+                    icon: ShieldCheck,
+                  },
+                ].map(({ name, icon: Icon }) => {
+                  const isSelected = selectedRole === name;
+
+                  return (
+                    <button
+                      key={name}
+                      type="button"
+                      onClick={() => setSelectedRole(name)}
+                      aria-pressed={isSelected}
+                      className={`inline-flex items-center gap-2 px-4 py-3
+                        rounded-xl border text-sm font-semibold
+                        transition-all duration-200
+                        focus-visible:outline-none
+                        focus-visible:ring-2 focus-visible:ring-[#593C96]
+                        ${
+                          isSelected
+                            ? "bg-[#593C96] text-white border-[#593C96] shadow-md shadow-[#593C96]/20"
+                            : dark
+                            ? "bg-white/5 text-white/75 border-white/10 hover:border-[#C674CE] hover:bg-white/10"
+                            : "bg-white text-[#4B5563] border-[#E5E7EB] hover:border-[#593C96]/50 hover:bg-[#593C96]/5"
+                        }`}
+                    >
+                      <Icon size={18} strokeWidth={1.8} />
+                      {name}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
