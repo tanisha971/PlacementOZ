@@ -159,7 +159,7 @@ export default function Hero() {
           <div className="mt-9 flex flex-wrap gap-4">
             <Link
               to={`/register?role=${encodeURIComponent(registerRole)}`}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#593C96] to-[#326CB6] px-7 py-4 font-semibold text-white shadow-lg shadow-[#593C96]/20 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#593C96]"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#593C96] to-[#326CB6] px-7 py-2 font-semibold text-white shadow-lg shadow-[#593C96]/20 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#593C96]"
             >
               Get Started
               <ArrowRight size={19} />
