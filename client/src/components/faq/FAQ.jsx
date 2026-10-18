@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 
@@ -45,7 +46,6 @@ export default function FAQ() {
       }`}
     >
       <div className="max-w-3xl mx-auto px-6">
-        
         <div className="text-center mb-12">
           <span className="text-sm font-semibold text-[#593C96] uppercase tracking-wider">
             FAQ
@@ -57,7 +57,9 @@ export default function FAQ() {
             }`}
           >
             Frequently asked
-            <span className="text-[#593C96]"> questions.</span>
+            <span className="bg-gradient-to-r from-[#593C96] via-[#C674CE] to-[#326CB6] bg-clip-text text-transparent">
+              {" "}questions.
+            </span>
           </h2>
         </div>
 
@@ -68,7 +70,7 @@ export default function FAQ() {
             return (
               <div
                 key={item.question}
-                className={`rounded-2xl border overflow-hidden ${
+                className={`rounded-2xl border overflow-hidden transition-colors duration-300 ${
                   dark
                     ? "bg-white/[0.03] border-white/10"
                     : "bg-white border-black/5"
@@ -76,10 +78,11 @@ export default function FAQ() {
               >
                 <button
                   onClick={() => toggleFAQ(index)}
-                  className="w-full px-6 py-5 flex items-center justify-between text-left"
+                  aria-expanded={isOpen}
+                  className="w-full px-6 py-3.5 flex items-center justify-between gap-4 text-left"
                 >
                   <span
-                    className={`font-semibold ${
+                    className={`text-sm sm:text-base font-semibold ${
                       dark ? "text-white" : "text-[#1F1C47]"
                     }`}
                   >
@@ -87,7 +90,7 @@ export default function FAQ() {
                   </span>
 
                   <span
-                    className={`text-xl text-[#593C96] transition-transform ${
+                    className={`shrink-0 text-xl text-[#593C96] transition-transform duration-200 ${
                       isOpen ? "rotate-45" : ""
                     }`}
                   >
@@ -97,8 +100,8 @@ export default function FAQ() {
 
                 {isOpen && (
                   <div
-                    className={`px-6 pb-5 text-sm leading-6 ${
-                      dark ? "text-white/50" : "text-[#1F1C47]/55"
+                    className={`px-6 pb-4 text-sm leading-6 ${
+                      dark ? "text-white/60" : "text-[#4B5563]"
                     }`}
                   >
                     {item.answer}

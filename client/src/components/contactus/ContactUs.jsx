@@ -31,7 +31,9 @@ export default function ContactUs() {
                 }`}
               >
                 Let's build better
-                <span className="text-[#593C96]"> placements.</span>
+                <span className="bg-gradient-to-r from-[#593C96] via-[#C674CE] to-[#326CB6] bg-clip-text text-transparent">
+                  {" "}placements.
+                </span>
               </h2>
 
               <p

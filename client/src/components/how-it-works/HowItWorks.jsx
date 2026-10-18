@@ -1,29 +1,49 @@
+
+import {
+  UserRound,
+  BriefcaseBusiness,
+  Target,
+  FileCheck2,
+  TrendingUp,
+} from "lucide-react";
+
 import { useTheme } from "../../context/ThemeContext";
 
 const steps = [
   {
     number: "01",
-    title: "Create Your Profile",
-    description:
-      "Build your student profile with your education, skills, projects and career preferences.",
+    title: "Build Your Profile",
+    description: "Complete academic, skills, and project details.",
+    icon: UserRound,
+    color: "#593C96",
   },
   {
     number: "02",
     title: "Discover Opportunities",
-    description:
-      "Explore relevant placement opportunities and keep everything organized in one place.",
+    description: "Browse AI-curated job listings.",
+    icon: BriefcaseBusiness,
+    color: "#3287AE",
   },
   {
     number: "03",
-    title: "Track Your Journey",
-    description:
-      "Track applications, interviews, selections and your overall placement progress.",
+    title: "Check Eligibility & Match",
+    description: "See your match score and eligibility instantly.",
+    icon: Target,
+    color: "#326CB6",
   },
   {
     number: "04",
-    title: "Land Your Dream Role",
-    description:
-      "Use intelligent insights and preparation tools to improve your chances of success.",
+    title: "Prepare & Apply",
+    description: "Use AI tools to prepare and submit applications.",
+    icon: FileCheck2,
+    color: "#C674CE",
+  },
+  {
+    number: "05",
+    title: "Track Your Placement",
+    description: "Follow every stage until the offer letter.",
+    icon: TrendingUp,
+    color: "#593C96",
   },
 ];
 
@@ -33,66 +53,171 @@ export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className={`py-24 ${
-        dark ? "bg-[#13142C]" : "bg-[#F8F7FC]"
+      className={`relative isolate overflow-hidden  border-y py-20 transition-colors duration-300 sm:py-24 ${
+        dark
+          ? "border-white/10 bg-[#0F1025]"
+          : "border-[#E5E7EB] bg-[#F8F9FC]"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-sm font-semibold text-[#593C96] uppercase tracking-wider">
-            Simple Process
-          </span>
+    {/* Decorative background accents */}
+        {/* Decorative background accents */}
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute -left-32 top-16 -z-10 h-72 w-72 rounded-full blur-3xl ${
+          dark ? "bg-[#593C96]/15" : "bg-[#593C96]/[0.07]"
+        }`}
+      />
+
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute -right-32 bottom-0 -z-10 h-72 w-72 rounded-full blur-3xl ${
+          dark ? "bg-[#326CB6]/15" : "bg-[#326CB6]/[0.07]"
+        }`}
+      />
+
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        {/* Section heading */}
+        <div className="mx-auto mb-16 max-w-3xl text-center sm:mb-20">
 
           <h2
-            className={`text-4xl md:text-5xl font-bold mt-3 ${
+            className={`text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl ${
               dark ? "text-white" : "text-[#1F1C47]"
             }`}
           >
-            Your journey,
-            <span className="text-[#326CB6]"> simplified.</span>
+            How It{" "}
+            <span className="bg-gradient-to-r from-[#593C96] via-[#C674CE] to-[#326CB6] bg-clip-text text-transparent">
+              Works
+            </span>
           </h2>
+
+          <p
+            className={`mx-auto mt-5 max-w-2xl text-sm leading-7 sm:text-base ${
+              dark ? "text-white/60" : "text-[#4B5563]"
+            }`}
+          >
+            Your placement journey in five smart steps. From building your
+            profile to tracking your offers, everything stays organized in
+            one place.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((step, index) => (
-            <div key={step.number} className="relative">
-              
-              <div
-                className={`p-7 rounded-2xl border h-full ${
-                  dark
-                    ? "bg-white/[0.03] border-white/10"
-                    : "bg-white border-black/5"
-                }`}
-              >
-                <div className="flex items-center justify-between mb-8">
-                  <span className="text-4xl font-bold text-[#593C96]/20">
+        {/* Desktop timeline */}
+        <div className="relative hidden lg:block">
+          {/* Connecting line */}
+          <div
+            className={`absolute left-[10%] right-[10%] top-[30px] h-px ${
+              dark ? "bg-white/20" : "bg-[#593C96]/30"
+            }`}
+          />
+
+          <div className="relative grid grid-cols-5 gap-5">
+            {steps.map((step) => {
+              const Icon = step.icon;
+
+              return (
+                <div
+                  key={step.number}
+                  className="group flex flex-col items-center text-center"
+                >
+                  {/* Number badge */}
+                  <div
+                    className="relative z-10 flex h-[60px] w-[60px] items-center justify-center rounded-2xl bg-gradient-to-br from-[#593C96] to-[#326CB6] text-lg font-bold text-white shadow-md shadow-[#593C96]/20 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg"
+                  >
                     {step.number}
-                  </span>
+                  </div>
 
-                  {index < steps.length - 1 && (
-                    <div className="hidden lg:block absolute left-[calc(100%-10px)] top-12 w-5 border-t border-dashed border-[#593C96]/30" />
-                  )}
+                  <h3
+                    className={`mt-6 text-base font-bold ${
+                      dark ? "text-white" : "text-[#1F1C47]"
+                    }`}
+                  >
+                    {step.title}
+                  </h3>
+
+                  <p
+                    className={`mt-2 max-w-[230px] text-sm leading-6 ${
+                      dark ? "text-white/60" : "text-[#4B5563]"
+                    }`}
+                  >
+                    {step.description}
+                  </p>
                 </div>
+              );
+            })}
+          </div>
+        </div>
 
-                <h3
-                  className={`text-lg font-bold ${
-                    dark ? "text-white" : "text-[#1F1C47]"
+        {/* Mobile and tablet timeline */}
+        <div className="mx-auto max-w-2xl lg:hidden">
+          <div className="space-y-5">
+            {steps.map((step, index) => {
+              const Icon = step.icon;
+
+              return (
+                <div
+                  key={step.number}
+                  className={`relative flex gap-4 rounded-2xl border p-5 transition-all duration-300 ${
+                    dark
+                      ? "border-white/10 bg-white/[0.035] hover:border-white/20"
+                      : "border-[#E5E7EB] bg-white hover:border-[#593C96]/25 hover:shadow-lg hover:shadow-[#593C96]/5"
                   }`}
                 >
-                  {step.title}
-                </h3>
+                  {/* Vertical connector */}
+                  {index !== steps.length - 1 && (
+                    <div
+                      className={`absolute bottom-[-22px] left-[31px] h-5 w-px ${
+                        dark ? "bg-white/20" : "bg-[#593C96]/25"
+                      }`}
+                    />
+                  )}
 
-                <p
-                  className={`text-sm leading-6 mt-3 ${
-                    dark ? "text-white/50" : "text-[#1F1C47]/55"
-                  }`}
-                >
-                  {step.description}
-                </p>
-              </div>
-            </div>
-          ))}
+                  {/* Step icon */}
+                  <div
+                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#593C96] to-[#326CB6] text-white shadow-sm"
+                  >
+                    <Icon size={21} strokeWidth={1.8} />
+                  </div>
+
+                  <div className="min-w-0 flex-1">
+                    <div
+                      className="mb-1 text-xs font-bold tracking-wider"
+                      style={{ color: step.color }}
+                    >
+                      STEP {step.number}
+                    </div>
+
+                    <h3
+                      className={`text-base font-bold ${
+                        dark ? "text-white" : "text-[#1F1C47]"
+                      }`}
+                    >
+                      {step.title}
+                    </h3>
+
+                    <p
+                      className={`mt-1 text-sm leading-6 ${
+                        dark ? "text-white/60" : "text-[#4B5563]"
+                      }`}
+                    >
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Bottom note */}
+        <div
+          className={`mt-14 flex flex-wrap items-center justify-center gap-2 text-sm ${
+            dark ? "text-white/50" : "text-[#6B7280]"
+          }`}
+        >
+          <Target size={17} className="text-[#593C96]" />
+          <span>
+            One platform. Five steps. A smarter placement journey.
+          </span>
         </div>
       </div>
     </section>
