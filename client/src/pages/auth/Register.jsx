@@ -108,7 +108,7 @@ export default function Register() {
         JSON.stringify(data.user)
       );
       // Redirect after successful registration.
-      navigate("/dashboard", { replace: true });
+      navigate("/student/dashboard", { replace: true });
     } catch {
       setError("Cannot connect to the server. Please try again.");
     }

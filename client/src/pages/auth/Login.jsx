@@ -73,7 +73,7 @@ export default function Login() {
       sessionStorage.setItem("placementoz_user", JSON.stringify(data.user));
 
       // Replace with the dashboard route you've configured.
-      navigate("/dashboard", { replace: true });
+      navigate("/student/dashboard", { replace: true });
     } catch {
       setError("Cannot connect to the server. Please try again.");
     }
