@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   GraduationCap,
   BriefcaseBusiness,
@@ -46,6 +46,7 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -66,32 +67,49 @@ export default function Register() {
     setError("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (formData.password.length < 8) {
-      setError("Password must contain at least 8 characters.");
-      return;
-    }
+    setError("");
 
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match.");
       return;
     }
 
-    if (!formData.acceptedTerms) {
-      setError("Please accept the Terms and Privacy Policy.");
-      return;
-    }
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/auth/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            password: formData.password,
+            confirmPassword: formData.confirmPassword,
+            role,
+          }),
+        }
+      );
 
-    // Connect your registration API here.
-    // Never grant privileged roles from client-side selection alone.
-    console.log("Registration submitted:", {
-      name: formData.name,
-      email: formData.email,
-      password: formData.password,
-      role,
-    });
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "Registration failed.");
+        return;
+      }
+
+      // Temporary starter approach for local development.
+      sessionStorage.setItem("placementoz_token", data.token);
+      sessionStorage.setItem("placementoz_user", JSON.stringify(data.user));
+
+      // Redirect after successful registration.
+      navigate("/login", { replace: true });
+    } catch {
+      setError("Cannot connect to the server. Please try again.");
+    }
   };
 
   const inputClass =

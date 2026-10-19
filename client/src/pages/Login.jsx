@@ -1,6 +1,7 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import {
   Mail,
   LockKeyhole,
@@ -22,7 +23,7 @@ const stats = [
 
 export default function Login() {
   const { dark } = useTheme();
-
+  const navigate = useNavigate();
   const [role, setRole] = useState("Student");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
@@ -41,16 +42,41 @@ export default function Login() {
     setError("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
-    // Connect your existing login API here.
-    console.log("Login submitted:", {
-      email: formData.email,
-      password: formData.password,
-      role,
-      rememberMe,
-    });
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/auth/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+            role,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "Login failed.");
+        return;
+      }
+
+      sessionStorage.setItem("placementoz_token", data.token);
+      sessionStorage.setItem("placementoz_user", JSON.stringify(data.user));
+
+      // Replace with the dashboard route you've configured.
+      navigate("/dashboard", { replace: true });
+    } catch {
+      setError("Cannot connect to the server. Please try again.");
+    }
   };
 
   const inputClass = `w-full rounded-lg border py-2.5 pl-10 pr-10 text-sm outline-none transition focus:border-[#593C96] focus:ring-2 focus:ring-[#593C96]/10 ${
