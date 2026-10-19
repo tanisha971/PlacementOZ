@@ -9,8 +9,8 @@ import {
   EyeOff,
   ArrowRight,
 } from "lucide-react";
-import Logo from "../components/common/Logo";
-import { useTheme } from "../context/ThemeContext";
+import Logo from "../../components/common/Logo";
+import { useTheme } from "../../context/ThemeContext";
 
 const roles = ["Student", "Officer", "Recruiter", "Admin"];
 

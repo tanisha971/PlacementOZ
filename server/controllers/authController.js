@@ -6,6 +6,10 @@ import User from "../models/User.js";
 const allowedRegistrationRoles = ["Student", "Officer", "Recruiter"];
 
 function createToken(user) {
+  if (!process.env.JWT_SECRET) {
+    throw new Error("JWT_SECRET is not configured.");
+  }
+
   return jwt.sign(
     {
       id: user._id.toString(),
@@ -189,4 +193,17 @@ export async function login(req, res) {
       message: "Unable to sign in right now.",
     });
   }
+}
+
+// GET /api/auth/me
+export async function getMe(req, res) {
+  return res.status(200).json({
+    success: true,
+    user: {
+      id: req.user._id,
+      name: req.user.name,
+      email: req.user.email,
+      role: req.user.role,
+    },
+  });
 }

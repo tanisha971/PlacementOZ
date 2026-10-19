@@ -13,8 +13,8 @@ import {
   ArrowRight,
   Circle,
 } from "lucide-react";
-import Logo from "../components/common/Logo";
-import { useTheme } from "../context/ThemeContext";
+import Logo from "../../components/common/Logo";
+import { useTheme } from "../../context/ThemeContext";
 
 const roles = [
   {
@@ -103,10 +103,12 @@ export default function Register() {
 
       // Temporary starter approach for local development.
       sessionStorage.setItem("placementoz_token", data.token);
-      sessionStorage.setItem("placementoz_user", JSON.stringify(data.user));
-
+      sessionStorage.setItem(
+        "placementoz_user",
+        JSON.stringify(data.user)
+      );
       // Redirect after successful registration.
-      navigate("/login", { replace: true });
+      navigate("/dashboard", { replace: true });
     } catch {
       setError("Cannot connect to the server. Please try again.");
     }

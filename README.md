@@ -61,6 +61,17 @@ Development dependency: npm install -D nodemon
     "start": "node src/server.js"
   }
 
+Authentication test checklist
+0/8
+
+[ ] Register a new Student account.
+[ ] Confirm a new document appears in MongoDB Compass.
+[ ] Verify its password field contains a bcrypt hash, not the original password.
+[ ] Confirm registration redirects to /dashboard.
+[ ] Refresh /dashboard and confirm it remains accessible with a valid token.
+[ ] Remove placementoz_token from sessionStorage and refresh; confirm you are redirected to /login.
+[ ] Call /api/auth/student without a token and confirm the API returns 401.
+[ ] Log in with incorrect credentials and confirm login is rejected.
 
 
 
