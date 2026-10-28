@@ -32,7 +32,7 @@ export default function DashboardNavbar({ role = "Student" }) {
 
   return (
     <header
-      className={`sticky top-0 z-30 flex h-[81px] items-center gap-4 border-b px-5 sm:px-7 ${
+      className={`sticky top-0 z-30 flex h-[78px] items-center gap-4 border-b px-5 sm:px-7 ${
         dark
           ? "border-white/10 bg-[#17182F] text-white"
           : "border-slate-200 bg-white text-[#1F1C47]"

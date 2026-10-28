@@ -1,96 +1,82 @@
 
-import { useOutletContext, useNavigate } from "react-router-dom";
-import {
-  Target,
-  BriefcaseBusiness,
-  FileText,
-  TrendingUp,
-  Sparkles,
-} from "lucide-react";
-
+import { useOutletContext } from "react-router-dom";
 import StatCard from "../../components/dashboard/StatCard";
 import RecommendedJobs from "../../components/dashboard/RecommendedJobs";
 import MatchScoreCard from "../../components/dashboard/MatchScoreCard";
 import NotificationsCard from "../../components/dashboard/NotificationsCard";
 import SkillGapsCard from "../../components/dashboard/SkillGapsCard";
+import {
+  UserRound,
+  BriefcaseBusiness,
+  FileCheck,
+  Target,
+} from "lucide-react";
 
 export default function DashboardPage() {
   const { user } = useOutletContext();
-  const navigate = useNavigate();
 
-  const name = user?.name?.trim().split(/\s+/)[0] || "Student";
   const hour = new Date().getHours();
-
   const greeting =
-    hour < 12 ? "Good Morning" : hour < 17 ? "Good Afternoon" : "Good Evening";
+    hour < 12
+      ? "Good Morning"
+      : hour < 17
+        ? "Good Afternoon"
+        : "Good Evening";
+
+  const firstName = user?.name?.split(" ")[0] || "Student";
 
   const stats = [
     {
-      icon: Target,
-      value: "92%",
       label: "Profile Completion",
-      trend: "+3% this week",
+      value: "92%",
+      icon: UserRound,
       color: "purple",
+      trend: "+8% this month",
     },
     {
-      icon: BriefcaseBusiness,
-      value: "24",
       label: "Recommended Jobs",
-      trend: "5 new today",
+      value: "24",
+      icon: BriefcaseBusiness,
       color: "blue",
+      trend: "12 new this week",
     },
     {
-      icon: FileText,
-      value: "8",
       label: "Applications",
-      trend: "3 active",
-      color: "indigo",
+      value: "8",
+      icon: FileCheck,
+      color: "green",
+      trend: "2 in progress",
     },
     {
-      icon: TrendingUp,
-      value: "91%",
       label: "Match Score",
-      trend: "Top 5% of students",
+      value: "91%",
+      icon: Target,
       color: "pink",
+      trend: "Excellent match",
     },
   ];
 
   return (
-    <div className="mx-auto max-w-[1600px] space-y-7">
-      {/* Welcome section */}
-      <section className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-        <div>
-          <h1 className="text-2xl font-extrabold tracking-tight text-[#1F1C47] sm:text-3xl">
-            {greeting}, {name} 👋
-          </h1>
-          <p className="mt-2 text-sm text-slate-600 sm:text-base">
-            Let's optimize your placement journey. You have{" "}
-            <span className="font-semibold text-[#593C96]">
-              3 new matches
-            </span>{" "}
-            today.
-          </p>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => navigate("../ai-assistant")}
-          className="inline-flex items-center justify-center gap-2 self-start rounded-xl bg-gradient-to-r from-[#593C96] to-[#C674CE] px-5 py-3 text-sm font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg sm:self-auto"
-        >
-          <Sparkles size={17} />
-          Ask AI
-        </button>
+    <div className="mx-auto w-full max-w-[1600px] space-y-5">
+      {/* Greeting */}
+      <section>
+        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+          {greeting}, {firstName}!
+        </h1>
+        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+          Here's what's happening with your placement journey.
+        </p>
       </section>
 
-      {/* Summary statistics */}
+      {/* Summary cards */}
       <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map((stat) => (
           <StatCard key={stat.label} {...stat} />
         ))}
       </section>
 
-      {/* Dashboard content */}
-      <section className="grid grid-cols-1 items-start gap-6 2xl:grid-cols-[minmax(0,1.8fr)_minmax(330px,0.9fr)]">
+      {/* Main dashboard grid */}
+      <section className="grid min-w-0 grid-cols-1 items-start gap-5 xl:grid-cols-[minmax(0,1.8fr)_minmax(340px,0.9fr)]">
         <div className="min-w-0">
           <RecommendedJobs />
         </div>

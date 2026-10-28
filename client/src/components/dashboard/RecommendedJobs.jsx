@@ -124,7 +124,7 @@ export default function RecommendedJobs() {
                     </span>
                     <p className="mt-1 flex items-center gap-1 text-xs font-medium text-emerald-600 sm:justify-end">
                       <CheckCircle2 size={13} />
-                      Eligibility to be verified
+                      Eligibility
                     </p>
                   </div>
                 </div>

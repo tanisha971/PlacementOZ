@@ -22,16 +22,22 @@ export default function DashboardLayout() {
 
   return (
     <div
-      className={`min-h-screen ${
-        dark ? "bg-[#0F1025] text-white" : "bg-[#F7F8FC] text-[#1F1C47]"
+      className={`min-h-screen transition-colors duration-200 ${
+        dark
+          ? "bg-[#10111F] text-white"
+          : "bg-[#F7F8FC] text-[#17152F]"
       }`}
     >
+      {/* Fixed left sidebar */}
       <DashboardSidebar role={role} />
 
-      <div className="min-h-screen lg:ml-[250px]">
+      {/* Main application area */}
+      <div className="min-h-screen min-w-0 lg:ml-[288px]">
+        {/* Fixed-height top navbar */}
         <DashboardNavbar role={role} />
 
-        <main className="min-w-0 px-4 py-6 sm:px-6 lg:px-9 lg:py-8">
+        {/* Nested route content */}
+        <main className="min-w-0 px-4 py-4 sm:px-6 lg:px-8">
           <Outlet context={{ user, role }} />
         </main>
       </div>

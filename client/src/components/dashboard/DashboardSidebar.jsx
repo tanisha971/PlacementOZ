@@ -71,7 +71,7 @@ export default function DashboardSidebar({ role = "Student" }) {
   const items = navigationByRole[role] || navigationByRole.Student;
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-40 flex w-[250px] flex-col border-r border-slate-200 bg-white">
+    <aside className="fixed inset-y-0 left-0 z-40 flex w-[288px] flex-col border-r border-slate-200 bg-white">
       <div className="flex h-[81px] shrink-0 items-center border-b border-slate-200 px-5">
         <Logo size="md" />
       </div>
