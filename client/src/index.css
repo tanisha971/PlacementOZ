@@ -66,3 +66,18 @@ select {
   background: #593c96;
   border-radius: 999px;
 }
+
+
+@keyframes loader-progress {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+.animate-loader-progress {
+  animation: loader-progress 1.5s ease-in-out infinite;
+}
