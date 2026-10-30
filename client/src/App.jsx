@@ -7,7 +7,10 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Unauthorized from "./pages/auth/Unauthorized";
-import './index.css';
+import MyProfile from "./components/myprofile/MyProfile";
+import Jobs from "./components/jobs/Jobs";
+import Applications from "./components/applications/Applications";
+import './styles/index.css';
 
 function App() {
   return (
@@ -26,6 +29,9 @@ function App() {
             element={<Navigate to="dashboard" replace />}
           />
           <Route path="dashboard" element={<DashboardPage />} />
+          <Route path="profile" element={<MyProfile />} />
+          <Route path="jobs" element={<Jobs />} />
+          <Route path="applications" element={<Applications />} />
         </Route>
       </Route>
       

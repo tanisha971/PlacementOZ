@@ -10,6 +10,8 @@ import ContactUs from "../components/contactus/ContactUs";
 import FAQ from "../components/faq/FAQ";
 import Footer from "../components/footer/Footer";
 import Loader from "../components/common/Loader";
+import "../styles/theme.css";
+import "../styles/index.css";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);

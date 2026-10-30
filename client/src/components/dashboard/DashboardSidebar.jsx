@@ -1,5 +1,6 @@
 
 import { NavLink } from "react-router-dom";
+
 import {
   LayoutDashboard,
   UserRound,
@@ -16,8 +17,9 @@ import {
   Users,
   Building2,
   ClipboardList,
-  ChevronLeft,
+  GraduationCap,
 } from "lucide-react";
+
 import Logo from "../common/Logo";
 import ProfileBar from "./ProfileBar";
 
@@ -36,6 +38,7 @@ const navigationByRole = {
     { label: "Notifications", path: "notifications", icon: Bell, badge: "3" },
     { label: "Settings", path: "settings", icon: Settings },
   ],
+
   Officer: [
     { label: "Dashboard", path: "dashboard", icon: LayoutDashboard },
     { label: "Students", path: "students", icon: Users },
@@ -45,6 +48,7 @@ const navigationByRole = {
     { label: "Notifications", path: "notifications", icon: Bell },
     { label: "Settings", path: "settings", icon: Settings },
   ],
+
   Recruiter: [
     { label: "Dashboard", path: "dashboard", icon: LayoutDashboard },
     { label: "Company Profile", path: "profile", icon: Building2 },
@@ -53,29 +57,29 @@ const navigationByRole = {
     { label: "Interviews", path: "interviews", icon: MessageSquare },
     { label: "Settings", path: "settings", icon: Settings },
   ],
+
   Admin: [
     { label: "Dashboard", path: "dashboard", icon: LayoutDashboard },
     { label: "Users", path: "users", icon: Users },
-    { label: "Students", path: "students", icon: GraduationCapFallback },
+    { label: "Students", path: "students", icon: GraduationCap },
     { label: "Companies", path: "companies", icon: Building2 },
     { label: "Job Listings", path: "jobs", icon: BriefcaseBusiness },
     { label: "Settings", path: "settings", icon: Settings },
   ],
 };
 
-function GraduationCapFallback(props) {
-  return <BookOpen {...props} />;
-}
-
 export default function DashboardSidebar({ role = "Student" }) {
   const items = navigationByRole[role] || navigationByRole.Student;
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-40 flex w-[288px] flex-col border-r border-slate-200 bg-white">
-      <div className="flex h-[81px] shrink-0 items-center border-b border-slate-200 px-5">
+    <aside className="fixed inset-y-0 left-0 z-40 flex w-[288px] flex-col border-r border-border bg-surface text-text-primary transition-colors duration-300">
+
+      {/* Brand */}
+      <div className="flex h-[81px] shrink-0 items-center border-b border-border px-5">
         <Logo size="md" />
       </div>
 
+      {/* Navigation */}
       <nav
         aria-label={`${role} navigation`}
         className="flex-1 space-y-1 overflow-y-auto px-2.5 py-4"
@@ -86,18 +90,19 @@ export default function DashboardSidebar({ role = "Student" }) {
             to={path}
             end={path === "dashboard"}
             className={({ isActive }) =>
-              `flex min-h-12 items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition ${
+              `flex min-h-12 items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition-colors duration-200 ${
                 isActive
-                  ? "bg-[#593C96]/10 text-[#593C96]"
-                  : "text-slate-600 hover:bg-slate-50 hover:text-[#593C96]"
+                  ? "bg-primary-soft text-primary"
+                  : "text-text-secondary hover:bg-surface-hover hover:text-primary"
               }`
             }
           >
             <Icon size={20} strokeWidth={1.8} />
+
             <span className="flex-1">{label}</span>
 
             {badge && (
-              <span className="rounded-full bg-[#593C96] px-2 py-0.5 text-[10px] font-bold text-white">
+              <span className="rounded-full bg-primary px-2 py-0.5 text-[10px] font-bold text-text-inverse">
                 {badge}
               </span>
             )}
@@ -105,6 +110,7 @@ export default function DashboardSidebar({ role = "Student" }) {
         ))}
       </nav>
 
+      {/* User profile */}
       <ProfileBar />
     </aside>
   );

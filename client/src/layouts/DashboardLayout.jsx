@@ -3,7 +3,6 @@ import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import DashboardNavbar from "../components/dashboard/DashboardNavbar";
 import DashboardSidebar from "../components/dashboard/DashboardSidebar";
-import { useTheme } from "../context/ThemeContext";
 
 function getStoredUser() {
   try {
@@ -16,18 +15,11 @@ function getStoredUser() {
 }
 
 export default function DashboardLayout() {
-  const { dark } = useTheme();
   const [user] = useState(getStoredUser);
   const role = user.role || "Student";
 
   return (
-    <div
-      className={`min-h-screen transition-colors duration-200 ${
-        dark
-          ? "bg-[#10111F] text-white"
-          : "bg-[#F7F8FC] text-[#17152F]"
-      }`}
-    >
+    <div className="min-h-screen bg-background text-text-primary transition-colors duration-300">
       {/* Fixed left sidebar */}
       <DashboardSidebar role={role} />
 

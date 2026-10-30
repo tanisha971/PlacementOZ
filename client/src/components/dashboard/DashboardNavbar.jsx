@@ -8,11 +8,13 @@ import {
   Bell,
   ChevronDown,
 } from "lucide-react";
+
 import { useTheme } from "../../context/ThemeContext";
 
 export default function DashboardNavbar({ role = "Student" }) {
   const { dark, toggle } = useTheme();
   const navigate = useNavigate();
+
   const [user] = useState(() => {
     try {
       return JSON.parse(
@@ -30,62 +32,68 @@ export default function DashboardNavbar({ role = "Student" }) {
     .map((part) => part[0].toUpperCase())
     .join("");
 
+  const iconButtonClass =
+    "rounded-full p-2 text-text-secondary transition-colors hover:bg-surface-hover hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary/30";
+
   return (
-    <header
-      className={`sticky top-0 z-30 flex h-[78px] items-center gap-4 border-b px-5 sm:px-7 ${
-        dark
-          ? "border-white/10 bg-[#17182F] text-white"
-          : "border-slate-200 bg-white text-[#1F1C47]"
-      }`}
-    >
+    <header className="sticky top-0 z-30 flex h-[78px] items-center gap-4 border-b border-border bg-surface px-5 text-text-primary transition-colors duration-300 sm:px-7">
+
+      {/* Search */}
       <div className="relative w-full max-w-[545px]">
         <Search
           size={18}
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+          className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted"
         />
+
         <input
           type="search"
           placeholder="Search jobs, companies, skills..."
           aria-label="Search jobs, companies, and skills"
-          className={`h-11 w-full rounded-2xl border-0 pl-11 pr-4 text-sm outline-none ring-1 ring-transparent focus:ring-[#593C96]/40 ${
-            dark
-              ? "bg-white/[0.06] text-white placeholder:text-white/40"
-              : "bg-[#F4F3FA] text-[#1F1C47] placeholder:text-slate-400"
-          }`}
+          className="h-11 w-full rounded-2xl border border-transparent bg-surface-secondary pl-11 pr-4 text-sm text-text-primary outline-none transition placeholder:text-text-muted focus:border-primary/30 focus:ring-2 focus:ring-primary/10"
         />
       </div>
 
+      {/* Right actions */}
       <div className="ml-auto flex shrink-0 items-center gap-3 sm:gap-5">
+
+        {/* Theme toggle */}
         <button
           type="button"
           onClick={toggle}
           title={dark ? "Switch to light mode" : "Switch to dark mode"}
           aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-          className="rounded-full p-2 text-slate-500 transition hover:bg-slate-100 hover:text-[#593C96]"
+          className={iconButtonClass}
         >
           {dark ? <Sun size={20} /> : <Moon size={20} />}
         </button>
 
+        {/* Notifications */}
         <button
           type="button"
           onClick={() => navigate("notifications")}
           aria-label="Notifications"
-          className="relative rounded-full p-2 text-slate-500 transition hover:bg-slate-100 hover:text-[#593C96]"
+          className={`relative ${iconButtonClass}`}
         >
           <Bell size={21} />
-          <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white" />
+
+          <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-error ring-2 ring-surface" />
         </button>
 
+        {/* Profile */}
         <button
           type="button"
           onClick={() => navigate("profile")}
-          className="flex items-center gap-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[#593C96]/40"
+          className="flex items-center gap-2 rounded-full transition hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-primary/40"
           aria-label="Open profile"
         >
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#593C96] to-[#326CB6] text-sm font-bold text-white">
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-placement-purple to-placement-blue text-sm font-bold text-white">
             {initials || "U"}
           </span>
-          <ChevronDown size={15} className="hidden text-slate-400 sm:block" />
+
+          <ChevronDown
+            size={15}
+            className="hidden text-text-muted sm:block"
+          />
         </button>
       </div>
     </header>

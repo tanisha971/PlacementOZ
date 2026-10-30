@@ -1,6 +1,5 @@
 
 import { useState } from "react";
-import { useTheme } from "../../context/ThemeContext";
 
 const questions = [
   {
@@ -31,38 +30,33 @@ const questions = [
 ];
 
 export default function FAQ() {
-  const { dark } = useTheme();
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggleFAQ = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
+    setOpenIndex((prev) => (prev === index ? null : index));
   };
 
   return (
     <section
       id="faq"
-      className={`py-24 ${
-        dark ? "bg-[#13142C]" : "bg-[#F8F7FC]"
-      }`}
+      className="bg-surface-secondary py-24 transition-colors duration-300"
     >
-      <div className="max-w-3xl mx-auto px-6">
-        <div className="text-center mb-12">
-          <span className="text-sm font-semibold text-[#593C96] uppercase tracking-wider">
+      <div className="mx-auto max-w-3xl px-6">
+        {/* Section heading */}
+        <div className="mb-12 text-center">
+          <span className="text-sm font-semibold uppercase tracking-wider text-primary">
             FAQ
           </span>
 
-          <h2
-            className={`text-4xl md:text-5xl font-bold mt-3 ${
-              dark ? "text-white" : "text-[#1F1C47]"
-            }`}
-          >
+          <h2 className="mt-3 text-4xl font-bold text-text-primary md:text-5xl">
             Frequently asked
-            <span className="bg-gradient-to-r from-[#593C96] via-[#C674CE] to-[#326CB6] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-placement-purple via-placement-pink to-placement-blue bg-clip-text text-transparent">
               {" "}questions.
             </span>
           </h2>
         </div>
 
+        {/* FAQ accordion */}
         <div className="space-y-3">
           {questions.map((item, index) => {
             const isOpen = openIndex === index;
@@ -70,27 +64,22 @@ export default function FAQ() {
             return (
               <div
                 key={item.question}
-                className={`rounded-2xl border overflow-hidden transition-colors duration-300 ${
-                  dark
-                    ? "bg-white/[0.03] border-white/10"
-                    : "bg-white border-black/5"
-                }`}
+                className="overflow-hidden rounded-2xl border border-border bg-surface transition-colors duration-300 hover:border-primary/30"
               >
                 <button
+                  type="button"
                   onClick={() => toggleFAQ(index)}
                   aria-expanded={isOpen}
-                  className="w-full px-6 py-3.5 flex items-center justify-between gap-4 text-left"
+                  aria-controls={`faq-answer-${index}`}
+                  className="flex w-full items-center justify-between gap-4 px-6 py-4 text-left"
                 >
-                  <span
-                    className={`text-sm sm:text-base font-semibold ${
-                      dark ? "text-white" : "text-[#1F1C47]"
-                    }`}
-                  >
+                  <span className="text-sm font-semibold text-text-primary sm:text-base">
                     {item.question}
                   </span>
 
                   <span
-                    className={`shrink-0 text-xl text-[#593C96] transition-transform duration-200 ${
+                    aria-hidden="true"
+                    className={`shrink-0 text-xl font-medium text-primary transition-transform duration-200 ${
                       isOpen ? "rotate-45" : ""
                     }`}
                   >
@@ -98,15 +87,13 @@ export default function FAQ() {
                   </span>
                 </button>
 
-                {isOpen && (
-                  <div
-                    className={`px-6 pb-4 text-sm leading-6 ${
-                      dark ? "text-white/60" : "text-[#4B5563]"
-                    }`}
-                  >
-                    {item.answer}
-                  </div>
-                )}
+                <div
+                  id={`faq-answer-${index}`}
+                  hidden={!isOpen}
+                  className="px-6 pb-5 text-sm leading-6 text-text-secondary"
+                >
+                  {item.answer}
+                </div>
               </div>
             );
           })}

@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import {
   GraduationCap,
   BriefcaseBusiness,
@@ -11,10 +12,9 @@ import {
   Eye,
   EyeOff,
   ArrowRight,
-  Circle,
 } from "lucide-react";
+
 import Logo from "../../components/common/Logo";
-import { useTheme } from "../../context/ThemeContext";
 
 const roles = [
   {
@@ -101,13 +101,12 @@ export default function Register() {
         return;
       }
 
-      // Temporary starter approach for local development.
       sessionStorage.setItem("placementoz_token", data.token);
       sessionStorage.setItem(
         "placementoz_user",
         JSON.stringify(data.user)
       );
-      // Redirect after successful registration.
+
       navigate("/student/dashboard", { replace: true });
     } catch {
       setError("Cannot connect to the server. Please try again.");
@@ -115,12 +114,19 @@ export default function Register() {
   };
 
   const inputClass =
-    "w-full rounded-lg border border-[#E5E7EB] bg-white py-2.5 pl-10 pr-3 text-sm text-[#1F1C47] outline-none transition placeholder:text-[#9CA3AF] focus:border-[#593C96] focus:ring-2 focus:ring-[#593C96]/10";
+    "w-full rounded-lg border border-border bg-surface py-2.5 pl-10 pr-10 text-sm text-text-primary outline-none transition placeholder:text-text-muted focus:border-primary focus:ring-2 focus:ring-primary/10";
 
   return (
-    <main className="grid min-h-screen bg-[#F8F9FC] lg:grid-cols-2">
+    <main className="grid min-h-screen bg-background transition-colors duration-300 lg:grid-cols-2">
+
       {/* Left branding panel */}
-      <section className="relative flex min-h-[390px] flex-col justify-between overflow-hidden bg-gradient-to-br from-[#29204F] via-[#593C96] to-[#C674CE] px-7 py-9 text-white sm:px-10 lg:min-h-screen lg:px-11 lg:py-12">
+      <section className="relative flex min-h-[390px] flex-col justify-between overflow-hidden bg-gradient-to-br from-placement-navy via-placement-purple to-placement-pink px-7 py-9 text-white sm:px-10 lg:min-h-screen lg:px-11 lg:py-12">
+
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-20 top-1/4 h-80 w-80 rounded-full bg-placement-blue/20 blur-3xl"
+        />
+
         <div className="relative z-10">
           <Link to="/" aria-label="PlacementOZ home">
             <Logo size="md" dark />
@@ -141,6 +147,7 @@ export default function Register() {
                 <span className="mt-1 flex h-[17px] w-[17px] shrink-0 items-center justify-center rounded-full bg-white/25">
                   <span className="h-1.5 w-1.5 rounded-full bg-white" />
                 </span>
+
                 {benefit}
               </li>
             ))}
@@ -154,19 +161,21 @@ export default function Register() {
 
       {/* Registration form */}
       <section className="flex items-center justify-center px-4 py-8 sm:px-8">
-        <div className="w-full max-w-[402px] rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-sm sm:p-7">
-          <h2 className="text-[22px] font-bold tracking-tight text-[#1F1C47]">
+        <div className="w-full max-w-[402px] rounded-2xl border border-border bg-surface p-6 shadow-sm transition-colors duration-300 sm:p-7">
+
+          <h2 className="text-[22px] font-bold tracking-tight text-text-primary">
             Create your account
           </h2>
 
-          <p className="mt-1 text-xs text-[#6B7280]">
+          <p className="mt-1 text-xs text-text-secondary">
             Start your placement optimization journey
           </p>
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+
             {/* Role selection */}
             <fieldset>
-              <legend className="mb-2 text-xs font-medium text-[#1F1C47]">
+              <legend className="mb-2 text-xs font-medium text-text-primary">
                 I am a
               </legend>
 
@@ -182,15 +191,15 @@ export default function Register() {
                       aria-pressed={selected}
                       className={`flex w-full items-center gap-3 rounded-xl border px-3 py-2.5 text-left transition ${
                         selected
-                          ? "border-[#593C96] bg-[#593C96]/[0.045]"
-                          : "border-[#E5E7EB] hover:border-[#593C96]/40"
+                          ? "border-primary bg-primary-soft"
+                          : "border-border hover:border-primary/40 hover:bg-surface-hover"
                       }`}
                     >
                       <span
                         className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${
                           selected
-                            ? "bg-[#593C96] text-white"
-                            : "bg-[#F4F3FA] text-[#593C96]"
+                            ? "bg-primary text-text-inverse"
+                            : "bg-surface-secondary text-primary"
                         }`}
                       >
                         <Icon size={17} strokeWidth={1.8} />
@@ -199,14 +208,17 @@ export default function Register() {
                       <span className="min-w-0 flex-1">
                         <span
                           className={`block text-xs font-semibold ${
-                            selected ? "text-[#593C96]" : "text-[#1F1C47]"
+                            selected
+                              ? "text-primary"
+                              : "text-text-primary"
                           }`}
                         >
                           {value === "Officer"
                             ? "Placement Officer"
                             : value}
                         </span>
-                        <span className="mt-0.5 block text-[10px] leading-4 text-[#6B7280]">
+
+                        <span className="mt-0.5 block text-[10px] leading-4 text-text-secondary">
                           {description}
                         </span>
                       </span>
@@ -214,12 +226,12 @@ export default function Register() {
                       <span
                         className={`flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full border ${
                           selected
-                            ? "border-[#593C96] bg-[#593C96]"
-                            : "border-[#D1D5DB]"
+                            ? "border-primary bg-primary"
+                            : "border-border-strong"
                         }`}
                       >
                         {selected && (
-                          <span className="h-1.5 w-1.5 rounded-full bg-white" />
+                          <span className="h-1.5 w-1.5 rounded-full bg-text-inverse" />
                         )}
                       </span>
                     </button>
@@ -232,7 +244,7 @@ export default function Register() {
             <div>
               <label
                 htmlFor="register-name"
-                className="mb-1.5 block text-xs font-medium text-[#1F1C47]"
+                className="mb-1.5 block text-xs font-medium text-text-primary"
               >
                 Full Name
               </label>
@@ -240,8 +252,9 @@ export default function Register() {
               <div className="relative">
                 <UserRound
                   size={15}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF]"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted"
                 />
+
                 <input
                   id="register-name"
                   name="name"
@@ -260,7 +273,7 @@ export default function Register() {
             <div>
               <label
                 htmlFor="register-email"
-                className="mb-1.5 block text-xs font-medium text-[#1F1C47]"
+                className="mb-1.5 block text-xs font-medium text-text-primary"
               >
                 Email
               </label>
@@ -268,8 +281,9 @@ export default function Register() {
               <div className="relative">
                 <Mail
                   size={15}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF]"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted"
                 />
+
                 <input
                   id="register-email"
                   name="email"
@@ -288,7 +302,7 @@ export default function Register() {
             <div>
               <label
                 htmlFor="register-password"
-                className="mb-1.5 block text-xs font-medium text-[#1F1C47]"
+                className="mb-1.5 block text-xs font-medium text-text-primary"
               >
                 Password
               </label>
@@ -296,8 +310,9 @@ export default function Register() {
               <div className="relative">
                 <LockKeyhole
                   size={15}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF]"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted"
                 />
+
                 <input
                   id="register-password"
                   name="password"
@@ -308,13 +323,14 @@ export default function Register() {
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  className={`${inputClass} pr-10`}
+                  className={inputClass}
                 />
+
                 <button
                   type="button"
                   aria-label={showPassword ? "Hide password" : "Show password"}
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9CA3AF] hover:text-[#593C96]"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted transition-colors hover:text-primary"
                 >
                   {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
@@ -325,7 +341,7 @@ export default function Register() {
             <div>
               <label
                 htmlFor="register-confirm-password"
-                className="mb-1.5 block text-xs font-medium text-[#1F1C47]"
+                className="mb-1.5 block text-xs font-medium text-text-primary"
               >
                 Confirm Password
               </label>
@@ -333,8 +349,9 @@ export default function Register() {
               <div className="relative">
                 <LockKeyhole
                   size={15}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF]"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted"
                 />
+
                 <input
                   id="register-confirm-password"
                   name="confirmPassword"
@@ -344,8 +361,9 @@ export default function Register() {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   required
-                  className={`${inputClass} pr-10`}
+                  className={inputClass}
                 />
+
                 <button
                   type="button"
                   aria-label={
@@ -356,7 +374,7 @@ export default function Register() {
                   onClick={() =>
                     setShowConfirmPassword((prev) => !prev)
                   }
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9CA3AF] hover:text-[#593C96]"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted transition-colors hover:text-primary"
                 >
                   {showConfirmPassword ? (
                     <EyeOff size={15} />
@@ -367,52 +385,60 @@ export default function Register() {
               </div>
             </div>
 
+            {/* Error message */}
             {error && (
-              <p role="alert" className="text-xs text-red-600">
+              <p
+                role="alert"
+                className="rounded-lg border border-error/20 bg-error/10 px-3 py-2 text-xs text-error"
+              >
                 {error}
               </p>
             )}
 
+            {/* Create account */}
             <button
               type="submit"
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#593C96] py-3 text-sm font-semibold text-white transition hover:bg-[#4B3280] focus:outline-none focus:ring-2 focus:ring-[#593C96]/40 focus:ring-offset-2"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-semibold text-text-inverse transition hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary/40 focus:ring-offset-2 focus:ring-offset-surface"
             >
               Create Account
               <ArrowRight size={16} />
             </button>
 
-            <label className="flex items-start justify-center gap-2 text-center text-[10px] leading-5 text-[#6B7280]">
+            {/* Terms and conditions */}
+            <label className="flex items-start justify-center gap-2 text-center text-[10px] leading-5 text-text-secondary">
               <input
                 type="checkbox"
                 name="acceptedTerms"
                 checked={formData.acceptedTerms}
                 onChange={handleChange}
                 required
-                className="mt-1 accent-[#593C96]"
+                className="mt-1 h-3.5 w-3.5 shrink-0 accent-primary"
               />
+
               <span>
                 By registering you agree to our{" "}
                 <Link
                   to="/terms"
-                  className="font-medium text-[#593C96] hover:underline"
+                  className="font-medium text-primary hover:underline"
                 >
                   Terms
                 </Link>{" "}
                 and{" "}
                 <Link
                   to="/privacy"
-                  className="font-medium text-[#593C96] hover:underline"
+                  className="font-medium text-primary hover:underline"
                 >
                   Privacy Policy
                 </Link>
               </span>
             </label>
 
-            <p className="pt-1 text-center text-xs text-[#6B7280]">
+            {/* Login link */}
+            <p className="pt-1 text-center text-xs text-text-secondary">
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="font-semibold text-[#593C96] hover:underline"
+                className="font-semibold text-primary hover:underline"
               >
                 Sign in
               </Link>

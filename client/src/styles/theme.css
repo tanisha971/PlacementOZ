@@ -1,0 +1,129 @@
+
+/* =========================================
+   PLACEMENTOZ DESIGN SYSTEM
+   Tailwind CSS v4
+========================================= */
+
+/* Use .dark on html to activate dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* =========================================
+   SEMANTIC COLOR TOKENS
+========================================= */
+
+@theme inline {
+  /* Brand */
+  --color-placement-purple: #593c96;
+  --color-placement-purple-light: #7555b5;
+  --color-placement-purple-dark: #452d79;
+
+  --color-placement-teal: #3287ae;
+  --color-placement-pink: #c674ce;
+  --color-placement-navy: #1f1c47;
+  --color-placement-blue: #326cb6;
+
+  /* Status */
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-info: var(--info);
+
+  /* Semantic surfaces */
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-surface-hover: var(--surface-hover);
+
+  /* Borders */
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  /* Text */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-inverse: var(--text-inverse);
+
+  /* Interactive states */
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+}
+
+/* =========================================
+   LIGHT THEME
+========================================= */
+
+:root {
+  color-scheme: light;
+
+  /* Brand */
+  --primary: #593c96;
+  --primary-hover: #452d79;
+  --primary-soft: #f0ebfa;
+
+  /* Backgrounds */
+  --background: #f7f8fc;
+  --surface: #ffffff;
+  --surface-secondary: #f3f2f9;
+  --surface-hover: #eeebf5;
+
+  /* Borders */
+  --border: #e5e7eb;
+  --border-strong: #d1d5db;
+
+  /* Text */
+  --text-primary: #1f1c47;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --text-inverse: #ffffff;
+
+  /* Status */
+  --success: #22a06b;
+  --warning: #d97706;
+  --error: #dc2626;
+  --info: #3287ae;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgb(31 28 71 / 6%);
+  --shadow-dropdown: 0 8px 24px rgb(31 28 71 / 10%);
+}
+
+/* =========================================
+   DARK THEME
+========================================= */
+
+.dark {
+  color-scheme: dark;
+
+  /* Brand */
+  --primary: #a78bfa;
+  --primary-hover: #c4b5fd;
+  --primary-soft: #30264a;
+
+  /* Backgrounds */
+  --background: #10111f;
+  --surface: #181a2c;
+  --surface-secondary: #202238;
+  --surface-hover: #292b43;
+
+  /* Borders */
+  --border: #303249;
+  --border-strong: #44465e;
+
+  /* Text */
+  --text-primary: #f4f2ff;
+  --text-secondary: #c1bfd2;
+  --text-muted: #9292aa;
+  --text-inverse: #1f1c47;
+
+  /* Status */
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --error: #f87171;
+  --info: #60b9e5;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgb(0 0 0 / 20%);
+  --shadow-dropdown: 0 8px 24px rgb(0 0 0 / 30%);
+}

@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+
+import {
+  createContext,
+  useContext,
+  useLayoutEffect,
+  useState,
+} from "react";
 
 const ThemeContext = createContext({
   dark: false,
@@ -7,17 +13,18 @@ const ThemeContext = createContext({
 
 export function ThemeProvider({ children }) {
   const [dark, setDark] = useState(() => {
-    const stored = localStorage.getItem("oz-dark");
-    return stored === "true";
+    return localStorage.getItem("oz-dark") === "true";
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
+    document.documentElement.style.colorScheme = dark ? "dark" : "light";
+
     localStorage.setItem("oz-dark", String(dark));
   }, [dark]);
 
   const toggle = () => {
-    setDark((prev) => !prev);
+    setDark((previous) => !previous);
   };
 
   return (

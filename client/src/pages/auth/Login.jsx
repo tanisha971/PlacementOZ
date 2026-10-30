@@ -9,8 +9,8 @@ import {
   EyeOff,
   ArrowRight,
 } from "lucide-react";
+
 import Logo from "../../components/common/Logo";
-import { useTheme } from "../../context/ThemeContext";
 
 const roles = ["Student", "Officer", "Recruiter", "Admin"];
 
@@ -22,8 +22,8 @@ const stats = [
 ];
 
 export default function Login() {
-  const { dark } = useTheme();
   const navigate = useNavigate();
+
   const [role, setRole] = useState("Student");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
@@ -39,6 +39,7 @@ export default function Login() {
       ...prev,
       [e.target.name]: e.target.value,
     }));
+
     setError("");
   };
 
@@ -72,34 +73,31 @@ export default function Login() {
       sessionStorage.setItem("placementoz_token", data.token);
       sessionStorage.setItem("placementoz_user", JSON.stringify(data.user));
 
-      // Replace with the dashboard route you've configured.
       navigate("/student/dashboard", { replace: true });
     } catch {
       setError("Cannot connect to the server. Please try again.");
     }
   };
 
-  const inputClass = `w-full rounded-lg border py-2.5 pl-10 pr-10 text-sm outline-none transition focus:border-[#593C96] focus:ring-2 focus:ring-[#593C96]/10 ${
-    dark
-      ? "border-white/10 bg-white/[0.04] text-white placeholder:text-white/35"
-      : "border-[#E5E7EB] bg-white text-[#1F1C47] placeholder:text-[#9CA3AF]"
-  }`;
+  const inputClass =
+    "w-full rounded-lg border border-border bg-surface py-2.5 pl-10 pr-10 text-sm text-text-primary outline-none transition placeholder:text-text-muted focus:border-primary focus:ring-2 focus:ring-primary/10";
 
   return (
-    <main
-      className={`grid min-h-screen lg:h-screen lg:grid-cols-2 ${
-        dark ? "bg-[#0F1025]" : "bg-[#F8F9FC]"
-      }`}
-    >
+    <main className="grid min-h-screen bg-background transition-colors duration-300 lg:h-screen lg:grid-cols-2">
+
       {/* Left branding panel */}
-      <section className="relative flex min-h-[360px] flex-col justify-between overflow-hidden bg-gradient-to-br from-[#29204F] via-[#593C96] to-[#326CB6] px-7 py-7 text-white sm:px-10 lg:h-screen lg:min-h-0 lg:px-14 lg:py-9">
+      <section className="relative flex min-h-[360px] flex-col justify-between overflow-hidden bg-gradient-to-br from-placement-navy via-placement-purple to-placement-blue px-7 py-7 text-white sm:px-10 lg:h-screen lg:min-h-0 lg:px-14 lg:py-9">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-20 top-1/4 h-80 w-80 rounded-full bg-[#C674CE]/15 blur-3xl"
+          className="pointer-events-none absolute -right-20 top-1/4 h-80 w-80 rounded-full bg-placement-pink/15 blur-3xl"
         />
 
         <div className="relative z-10">
-          <Link to="/" className="inline-flex" aria-label="PlacementOZ home">
+          <Link
+            to="/"
+            className="inline-flex"
+            aria-label="PlacementOZ home"
+          >
             <Logo size="lg" dark />
           </Link>
         </div>
@@ -118,11 +116,12 @@ export default function Login() {
             {stats.map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-xl border border-white/10 bg-white/[0.10] p-4 backdrop-blur-sm"
+                className="rounded-xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm"
               >
                 <p className="text-2xl font-extrabold sm:text-3xl">
                   {stat.value}
                 </p>
+
                 <p className="mt-1 text-sm text-white/65">
                   {stat.label}
                 </p>
@@ -138,47 +137,28 @@ export default function Login() {
 
       {/* Right login panel */}
       <section className="flex items-center justify-center px-4 py-6 sm:px-8 lg:h-screen lg:overflow-y-auto lg:px-10 lg:py-5">
-        <div
-          className={`w-full max-w-[500px] rounded-[20px] border p-6 shadow-sm sm:p-8 ${
-            dark
-              ? "border-white/10 bg-[#17182F]"
-              : "border-[#E5E7EB] bg-white"
-          }`}
-        >
+        <div className="w-full max-w-[500px] rounded-[20px] border border-border bg-surface p-6 shadow-sm transition-colors duration-300 sm:p-8">
+
+          {/* Heading */}
           <div className="mb-6">
-            <h2
-              className={`text-2xl font-bold tracking-tight sm:text-[30px] ${
-                dark ? "text-white" : "text-[#1F1C47]"
-              }`}
-            >
+            <h2 className="text-2xl font-bold tracking-tight text-text-primary sm:text-[30px]">
               Welcome back
             </h2>
 
-            <p
-              className={`mt-1.5 text-sm sm:text-base ${
-                dark ? "text-white/60" : "text-[#6B7280]"
-              }`}
-            >
+            <p className="mt-1.5 text-sm text-text-secondary sm:text-base">
               Sign in to your PlacementOZ account
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
+
             {/* Login role */}
             <div>
-              <label
-                className={`mb-2 block text-sm font-medium ${
-                  dark ? "text-white/80" : "text-[#374151]"
-                }`}
-              >
+              <label className="mb-2 block text-sm font-medium text-text-primary">
                 Login as
               </label>
 
-              <div
-                className={`grid grid-cols-4 gap-1 rounded-xl p-1 ${
-                  dark ? "bg-white/[0.06]" : "bg-[#F4F3FA]"
-                }`}
-              >
+              <div className="grid grid-cols-4 gap-1 rounded-xl bg-surface-secondary p-1">
                 {roles.map((item) => (
                   <button
                     key={item}
@@ -187,10 +167,8 @@ export default function Login() {
                     aria-pressed={role === item}
                     className={`rounded-lg px-1 py-2 text-xs font-semibold transition sm:text-sm ${
                       role === item
-                        ? "bg-[#593C96] text-white shadow-md shadow-[#593C96]/20"
-                        : dark
-                          ? "text-white/65 hover:bg-white/[0.06]"
-                          : "text-[#4B5563] hover:bg-white"
+                        ? "bg-primary text-text-inverse shadow-md shadow-primary/20"
+                        : "text-text-secondary hover:bg-surface-hover hover:text-text-primary"
                     }`}
                   >
                     {item}
@@ -203,9 +181,7 @@ export default function Login() {
             <div>
               <label
                 htmlFor="login-email"
-                className={`mb-1.5 block text-sm font-medium ${
-                  dark ? "text-white/85" : "text-[#1F2937]"
-                }`}
+                className="mb-1.5 block text-sm font-medium text-text-primary"
               >
                 Email
               </label>
@@ -213,7 +189,7 @@ export default function Login() {
               <div className="relative">
                 <Mail
                   size={18}
-                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9CA3AF]"
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted"
                 />
 
                 <input
@@ -235,16 +211,14 @@ export default function Login() {
               <div className="mb-1.5 flex items-center justify-between gap-3">
                 <label
                   htmlFor="login-password"
-                  className={`text-sm font-medium ${
-                    dark ? "text-white/85" : "text-[#1F2937]"
-                  }`}
+                  className="text-sm font-medium text-text-primary"
                 >
                   Password
                 </label>
 
                 <Link
                   to="/forgot-password"
-                  className="text-sm font-medium text-[#593C96] hover:underline"
+                  className="text-sm font-medium text-primary hover:underline"
                 >
                   Forgot password?
                 </Link>
@@ -253,7 +227,7 @@ export default function Login() {
               <div className="relative">
                 <LockKeyhole
                   size={18}
-                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9CA3AF]"
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted"
                 />
 
                 <input
@@ -272,7 +246,7 @@ export default function Login() {
                   type="button"
                   onClick={() => setShowPassword((prev) => !prev)}
                   aria-label={showPassword ? "Hide password" : "Show password"}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#9CA3AF] hover:text-[#593C96]"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-text-muted transition-colors hover:text-primary"
                 >
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
@@ -280,22 +254,22 @@ export default function Login() {
             </div>
 
             {/* Remember me */}
-            <label
-              className={`flex cursor-pointer items-center gap-2.5 text-sm ${
-                dark ? "text-white/60" : "text-[#6B7280]"
-              }`}
-            >
+            <label className="flex cursor-pointer items-center gap-2.5 text-sm text-text-secondary">
               <input
                 type="checkbox"
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
-                className="h-4 w-4 accent-[#593C96]"
+                className="h-4 w-4 accent-primary"
               />
               Remember me
             </label>
 
+            {/* Error message */}
             {error && (
-              <p role="alert" className="text-sm text-red-500">
+              <p
+                role="alert"
+                className="rounded-lg border border-error/20 bg-error/10 px-3 py-2 text-sm text-error"
+              >
                 {error}
               </p>
             )}
@@ -303,7 +277,7 @@ export default function Login() {
             {/* Sign in */}
             <button
               type="submit"
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#593C96] py-3 font-semibold text-white shadow-md shadow-[#593C96]/15 transition hover:bg-[#4B3280] focus:outline-none focus:ring-2 focus:ring-[#593C96]/40 focus:ring-offset-2"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 font-semibold text-text-inverse shadow-md shadow-primary/15 transition hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary/40 focus:ring-offset-2 focus:ring-offset-surface"
             >
               Sign In
               <ArrowRight size={18} />
@@ -312,43 +286,29 @@ export default function Login() {
 
           {/* Divider */}
           <div className="my-5 flex items-center gap-4">
-            <div
-              className={`h-px flex-1 ${
-                dark ? "bg-white/10" : "bg-[#E5E7EB]"
-              }`}
-            />
-            <span className="text-sm text-[#9CA3AF]">OR</span>
-            <div
-              className={`h-px flex-1 ${
-                dark ? "bg-white/10" : "bg-[#E5E7EB]"
-              }`}
-            />
+            <div className="h-px flex-1 bg-border" />
+
+            <span className="text-sm text-text-muted">OR</span>
+
+            <div className="h-px flex-1 bg-border" />
           </div>
 
           {/* Google sign-in */}
           <button
             type="button"
             onClick={() => setError("Google sign-in is not connected yet.")}
-            className={`flex w-full items-center justify-center gap-3 rounded-xl border py-3 text-sm font-semibold transition ${
-              dark
-                ? "border-white/10 text-white hover:bg-white/[0.05]"
-                : "border-[#E5E7EB] text-[#1F2937] hover:bg-[#F8F9FC]"
-            }`}
+            className="flex w-full items-center justify-center gap-3 rounded-xl border border-border py-3 text-sm font-semibold text-text-primary transition hover:bg-surface-hover"
           >
-            <span className="text-lg font-bold text-[#4285F4]">G</span>
+            <span className="text-lg font-bold text-info">G</span>
             Continue with Google
           </button>
 
           {/* Register link */}
-          <p
-            className={`mt-6 text-center text-sm ${
-              dark ? "text-white/60" : "text-[#6B7280]"
-            }`}
-          >
+          <p className="mt-6 text-center text-sm text-text-secondary">
             Don't have an account?{" "}
             <Link
               to="/register"
-              className="font-semibold text-[#593C96] hover:underline"
+              className="font-semibold text-primary hover:underline"
             >
               Create one
             </Link>

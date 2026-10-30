@@ -10,11 +10,9 @@ export default function Loader({
     <div
       role="status"
       aria-live="polite"
-      className={`flex flex-col items-center justify-center gap-5
-        bg-[#F7F8FC] text-[#1F1C47]
-        dark:bg-[#10111F] dark:text-white
-        ${fullScreen ? "min-h-screen w-full" : "min-h-[240px] w-full"}
-      `}
+      className={`flex w-full flex-col items-center justify-center gap-5 bg-background text-text-primary transition-colors duration-300 ${
+        fullScreen ? "min-h-screen" : "min-h-[240px]"
+      }`}
     >
       {/* Brand */}
       <div className="animate-pulse">
@@ -23,29 +21,29 @@ export default function Loader({
 
       {/* Animated loader */}
       <div className="relative flex items-center justify-center">
-        <div className="absolute h-16 w-16 rounded-full border-4 border-violet-100 dark:border-violet-950" />
+        <div className="absolute h-16 w-16 rounded-full border-4 border-primary/10" />
 
         <LoaderCircle
           size={54}
           strokeWidth={3}
-          className="animate-spin text-violet-600 dark:text-violet-400"
+          className="animate-spin text-primary"
         />
       </div>
 
       {/* Loading text */}
       <div className="space-y-2 text-center">
-        <p className="text-base font-semibold">
+        <p className="text-base font-semibold text-text-primary">
           {message}
         </p>
 
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-text-muted">
           Just a moment while everything gets ready.
         </p>
       </div>
 
       {/* Animated progress indicator */}
-      <div className="h-1.5 w-48 overflow-hidden rounded-full bg-violet-100 dark:bg-gray-800">
-        <div className="h-full w-1/2 animate-loader-progress rounded-full bg-violet-600 dark:bg-violet-400" />
+      <div className="h-1.5 w-48 overflow-hidden rounded-full bg-primary/10">
+        <div className="h-full w-1/2 animate-pulse rounded-full bg-primary" />
       </div>
     </div>
   );

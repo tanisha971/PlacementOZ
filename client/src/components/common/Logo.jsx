@@ -1,4 +1,9 @@
+
+import { useId } from "react";
+
 export default function Logo({ size = "md", dark = false }) {
+  const gradientId = useId();
+
   const sizes = {
     sm: 28,
     md: 36,
@@ -11,7 +16,8 @@ export default function Logo({ size = "md", dark = false }) {
     lg: "text-xl",
   };
 
-  const s = sizes[size];
+  const s = sizes[size] ?? sizes.md;
+  const textSize = textSizes[size] ?? textSizes.md;
 
   return (
     <div className="flex items-center gap-2.5">
@@ -21,24 +27,25 @@ export default function Logo({ size = "md", dark = false }) {
         viewBox="0 0 48 48"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
       >
         <defs>
           <linearGradient
-            id="logo-grad"
+            id={gradientId}
             x1="0"
             y1="0"
             x2="48"
             y2="48"
             gradientUnits="userSpaceOnUse"
           >
-            <stop offset="0%" stopColor="#593C96" />
-            <stop offset="100%" stopColor="#326CB6" />
+            <stop offset="0%" stopColor="var(--color-placement-purple)" />
+            <stop offset="100%" stopColor="var(--color-placement-blue)" />
           </linearGradient>
         </defs>
 
         <path
           d="M24 3L43.05 13.5V34.5L24 45L4.95 34.5V13.5L24 3Z"
-          fill="url(#logo-grad)"
+          fill={`url(#${gradientId})`}
         />
 
         <path
@@ -54,20 +61,21 @@ export default function Logo({ size = "md", dark = false }) {
 
         <path
           d="M25 23.5C25 21.567 26.567 20 28.5 20C30.433 20 32 21.567 32 23.5C32 25.433 30.433 27 28.5 27C26.567 27 25 25.433 25 23.5Z"
-          fill="#C674CE"
+          fill="var(--color-placement-pink)"
         />
 
         <path
           d="M32 32.5C32 30.567 30.433 29 28.5 29C26.567 29 25 30.567 25 32.5V35H32V32.5Z"
-          fill="#C674CE"
+          fill="var(--color-placement-pink)"
           opacity="0.8"
         />
       </svg>
 
+      
       <div>
         <div
-          className={`font-bold leading-none ${textSizes[size]} ${
-            dark ? "text-white" : "text-[#1F1C47]"
+          className={`font-bold leading-none ${textSize} ${
+            dark ? "text-white" : "text-text-primary"
           }`}
         >
           PlacementOZ
@@ -75,14 +83,15 @@ export default function Logo({ size = "md", dark = false }) {
 
         {size !== "sm" && (
           <div
-            className={`text-[10px] leading-none mt-0.5 font-medium tracking-wide ${
-              dark ? "text-white/60" : "text-[#593C96]"
+            className={`mt-0.5 text-[10px] font-medium leading-none tracking-wide ${
+              dark ? "text-white/70" : "text-primary"
             }`}
           >
             PLACEMENT OPTIMIZE
           </div>
         )}
       </div>
+
     </div>
   );
 }

@@ -16,6 +16,7 @@ export default function DashboardPage() {
   const { user } = useOutletContext();
 
   const hour = new Date().getHours();
+
   const greeting =
     hour < 12
       ? "Good Morning"
@@ -44,7 +45,7 @@ export default function DashboardPage() {
       label: "Applications",
       value: "8",
       icon: FileCheck,
-      color: "green",
+      color: "indigo",
       trend: "2 in progress",
     },
     {
@@ -58,12 +59,14 @@ export default function DashboardPage() {
 
   return (
     <div className="mx-auto w-full max-w-[1600px] space-y-5">
+
       {/* Greeting */}
       <section>
-        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+        <h1 className="text-2xl font-bold tracking-tight text-text-primary sm:text-3xl">
           {greeting}, {firstName}!
         </h1>
-        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+
+        <p className="mt-1 text-sm text-text-muted">
           Here's what's happening with your placement journey.
         </p>
       </section>
